@@ -1,0 +1,80 @@
+<!--
+  Generated template for the StudentsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+
+
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Students</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <button (click) = "showUserForm = !showUserForm" class = "btn btn-dark mb-3"> Add New User</button>
+    
+    <div class = "card=card=body mb-3" *ngIf = "showUserForm" text-justify>  
+        <ion-card>
+          <ion-grid justify-content-center align-items-center style="height: 100%">
+      <h2>Add User</h2>
+      <form (submit) = "onSubmit($event)">
+        <div class = "form-group">
+          <label> First Name</label>
+          <div>
+          <input type = "text" class = "form-control" name = "firstName" required [(ngModel)]="user.firstName">
+        </div>
+        {{user.FirstName}}
+        </div>
+      </form>
+      <form (submit) = "onSubmit($event)">
+          <div class = "form-group">
+            <label> Last Name</label>
+            <div>
+            <input type = "text" class = "form-control" name = "LastName"  [(ngModel)]="user.lastName">
+          </div>
+          </div>
+        </form>
+        <form (submit) = "onSubmit($event)">
+            <div class = "form-group">
+              <label> Year     </label>
+              <div>
+              <input type = "text" class = "form-control" name = "Year" [(ngModel)]="user.year">
+              </div>
+            </div>
+          </form>
+          <form (submit) = "onSubmit($event)">
+              <div class = "form-group">
+                <label> Email     </label>
+                <div>
+                <input type = "text" class = "form-control" name = "Email"  [(ngModel)]="user.email">
+                </div>
+              </div>
+            </form>
+            <button (click) = "addUser()" [disabled] = "user.firstName == '' || user.lastName ==''" class = "btn btn-light mb-3"> Add New User</button>
+          </ion-grid> </ion-card>
+    </div>
+
+    
+    <ul class = "list-unstyled" *ngIf = "users.length > 0">
+    
+        <li class="card card-body mb-2" *ngFor="let user of users">
+            <ion-card>
+            <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+            <!-- showing extended data if there is a year and email data -->
+            <ul *ngIf="showExtended && user.year && user.email">
+              <li class="list-group-item">Year: {{ user.year }}</li>
+              <li class="list-group-item">Email: {{ user.email }}</li>
+            </ul>
+          </ion-card>
+        </li>
+     
+      </ul>
+
+</ion-content>
